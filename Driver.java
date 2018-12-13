@@ -34,13 +34,28 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	JLabel label_start = new JLabel("Start");
 	Font font = new Font ("Courier New", 1, 100);
 
+	boolean classicBool = false;
+	boolean blueBool = false;
+	boolean greenBool = false;
+	boolean redBool = false;
+	boolean rainbowBool = false;
 	
+
 	
 	Classic classic = new Classic("flappyBirdClassic.png");
 	Blue blue = new Blue("flappyBirdBlue.png");
 	Green green = new Green("flappyBirdGreen.png");
 	Rainbow rainbow = new Rainbow("flappyBirdRainbow.png");
 	Red red = new Red("flappyBirdRed.png");
+	
+	
+	One one = new One("#1.png");
+	Two two = new Two("#2.png");
+	Three three = new Three("#3.png");
+	Four four = new Four("#4.png");
+	Five five = new Five("#5.png");
+	
+	
 	BottomPipe[] bp = new BottomPipe[4];
 	TopPipe[] tp = new TopPipe[4];
 
@@ -80,7 +95,45 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 						bp[i].setY(tp[i].getY()+1100);
 					}
 				//img.setBounds(x, y , w, h);
-
+			if(classicBool==true){
+				classic.setY(450);
+				blue.setY(450);
+				green.setY(450);
+				red.setY(450);
+				rainbow.setY(450);
+				classicBool=false;
+			}
+			if(blueBool==true){
+				classic.setY(450);
+				blue.setY(450);
+				green.setY(450);
+				red.setY(450);
+				rainbow.setY(450);
+				blueBool=false;
+			}
+			if(greenBool==true){
+				classic.setY(450);
+				blue.setY(450);
+				green.setY(450);
+				red.setY(450);
+				rainbow.setY(450);
+				greenBool=false;
+			}
+			if(redBool==true){
+				classic.setY(450);
+				blue.setY(450);
+				green.setY(450);
+				red.setY(450);
+				rainbow.setY(450);
+				redBool=false;
+			}if(rainbowBool==true){
+				classic.setY(450);
+				blue.setY(450);
+				green.setY(450);
+				red.setY(450);
+				rainbow.setY(450);
+				rainbowBool=false;
+			}
 			
 		}
 
@@ -137,6 +190,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.add(rainbow.getImg());
 		f.add(red.getImg());
 
+		f.add(one.getImg());
+		f.add(two.getImg());
+		f.add(three.getImg());
+		f.add(four.getImg());
+		f.add(five.getImg());
 
 		for(int i = 0; i<tp.length; i++){
 	tp[i] = new TopPipe("flappyPipeTop.jpg");
@@ -176,6 +234,77 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode());
+		if(e.getKeyCode()==49||e.getKeyCode()==97){//first flappy
+			label_start.setVisible(false);
+			blue.getImg().setVisible(false);
+			green.getImg().setVisible(false);
+			rainbow.getImg().setVisible(false);
+			red.getImg().setVisible(false);
+			classic.getImg().setVisible(true);
+			classicBool=true;
+			one.getImg().setVisible(false);
+			two.getImg().setVisible(false);
+			three.getImg().setVisible(false);
+			four.getImg().setVisible(false);
+			five.getImg().setVisible(false);
+		}
+		if(e.getKeyCode()==50||e.getKeyCode()==98){//secondflappy
+			label_start.setVisible(false);
+			classic.getImg().setVisible(false);
+			green.getImg().setVisible(false);
+			rainbow.getImg().setVisible(false);
+			red.getImg().setVisible(false);
+			blue.getImg().setVisible(true);
+			blueBool=true;
+			one.getImg().setVisible(false);
+			two.getImg().setVisible(false);
+			three.getImg().setVisible(false);
+			four.getImg().setVisible(false);
+			five.getImg().setVisible(false);
+		}
+		if(e.getKeyCode()==51||e.getKeyCode()==99){//third flappy
+			label_start.setVisible(false);
+			classic.getImg().setVisible(false);
+			blue.getImg().setVisible(false);
+			rainbow.getImg().setVisible(false);
+			red.getImg().setVisible(false);
+			green.getImg().setVisible(true);
+			greenBool=true;
+			one.getImg().setVisible(false);
+			two.getImg().setVisible(false);
+			three.getImg().setVisible(false);
+			four.getImg().setVisible(false);
+			five.getImg().setVisible(false);
+		}
+		if(e.getKeyCode()==52||e.getKeyCode()==100){//fourth flappy
+			label_start.setVisible(false);
+			classic.getImg().setVisible(false);
+			blue.getImg().setVisible(false);
+			green.getImg().setVisible(false);
+			rainbow.getImg().setVisible(false);
+			red.getImg().setVisible(true);
+			redBool=true;
+			one.getImg().setVisible(false);
+			two.getImg().setVisible(false);
+			three.getImg().setVisible(false);
+			four.getImg().setVisible(false);
+			five.getImg().setVisible(false);
+		}
+		if(e.getKeyCode()==53||e.getKeyCode()==101){//fifth flappy
+			label_start.setVisible(false);
+			classic.getImg().setVisible(false);
+			blue.getImg().setVisible(false);
+			green.getImg().setVisible(false);
+			red.getImg().setVisible(false);
+			rainbow.getImg().setVisible(true);
+			rainbowBool=true;
+			one.getImg().setVisible(false);
+			two.getImg().setVisible(false);
+			three.getImg().setVisible(false);
+			four.getImg().setVisible(false);
+			five.getImg().setVisible(false);
+		}
 		if(e.getKeyCode()==38){ //38 is up
 
 		}
