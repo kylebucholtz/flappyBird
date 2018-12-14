@@ -39,7 +39,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	boolean greenBool = false;
 	boolean redBool = false;
 	boolean rainbowBool = false;
-	
+	boolean started = false;
 
 	
 	Classic classic = new Classic("flappyBirdClassic.png");
@@ -94,6 +94,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					 bp[i].setX(1200);
 						bp[i].setY(tp[i].getY()+1100);
 					}
+				}
+			 
+		 
+		
 				//img.setBounds(x, y , w, h);
 			if(classicBool==true){
 				classic.setY(450);
@@ -134,6 +138,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				rainbow.setY(450);
 				rainbowBool=false;
 			}
+	
+			if(started == true){//when start button is clicked
+				 classic.setAY(1);
+				 classic.setVy(classic.getVy()+classic.getAY());
+				 classic.move();
+			 }
 			
 		}
 
@@ -148,7 +158,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//call their collision detection
 		
 		
-	}//end of update method - put code above for any updates on variable
+	//end of update method - put code above for any updates on variable
 		
 	
 	//==================code above ===========================
@@ -248,6 +258,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			three.getImg().setVisible(false);
 			four.getImg().setVisible(false);
 			five.getImg().setVisible(false);
+			started = true;
 		}
 		if(e.getKeyCode()==50||e.getKeyCode()==98){//secondflappy
 			label_start.setVisible(false);
@@ -369,5 +380,4 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 	
 }
-
 

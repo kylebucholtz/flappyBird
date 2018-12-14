@@ -7,7 +7,8 @@ public class Classic {
 		//fields for a Frogger object
 		private int x,y; //location of the object
 		private int w,h; //width and height of the object
-		private int vx, vy; //constant vel in x and y component
+		private double vx, vy; //constant vel in x and y component
+		private double AY;
 		private JLabel img; //holds image for object
 		
 		
@@ -23,6 +24,7 @@ public class Classic {
 			// frog is 20 wide and 20 high
 			w = 76; //width
 			h = 56; //height
+			vy=0;
 			
 			x = 30;
 			y = 90;
@@ -34,7 +36,6 @@ public class Classic {
 		}
 
 		public void move(){
-			x+=vx;
 			y+=vy;
 			img.setBounds(x, y, w, h);
 		}
@@ -65,20 +66,28 @@ public class Classic {
 			return h;
 		}
 		
-		public int getVx(){
+		public double getVx(){
 			return vx;
 		}
 		
-		public int getVy(){
+		public double getVy(){
 			return vy;
+		}
+		
+		public double getAY(){
+			return AY;
 		}
 		
 		public void setVx(int newVX){
 			vx = newVX;
 		}
 		
-		public void setVy(int newVY){
+		public void setVy(double newVY){
 			vy = newVY;
+		}
+		
+		public void setAY(double d){
+			AY = d;
 		}
 		
 		public void setX(int newX){
@@ -93,4 +102,3 @@ public class Classic {
 		
 		
 }
-
