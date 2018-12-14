@@ -40,6 +40,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	boolean redBool = false;
 	boolean rainbowBool = false;
 	boolean started = false;
+	boolean active = false;
 
 	
 	Classic classic = new Classic("flappyBirdClassic.png");
@@ -85,19 +86,29 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	/* do not draw here */
 	public void update() {
 		//use booleans to determine which collision is happening
-		for(int i=0; i <tp.length; i++){
-			tp[i].move();
+		
+		
+		if(started == true){
+			for(int i=0; i <tp.length; i++){
+				tp[i].setX(777+(i*200+i*90));
+				bp[i].setX(777+(i*200+i*90));
+				started = false;
+				active = true;
 		}
+		}
+		for(int i=0; i <tp.length; i++){
+				tp[i].move();
+		}
+		
 		for(int i=0; i<bp.length; i++){
 			 bp[i].setX(bp[i].getX()-5);
+			 {
 			 if(bp[i].getX()<0){
 					 bp[i].setX(1200);
 						bp[i].setY(tp[i].getY()+1100);
-					}
-				}
-			 
-		 
-		
+			
+			 }
+			 	
 				//img.setBounds(x, y , w, h);
 			if(classicBool==true){
 				classic.setY(450);
@@ -138,13 +149,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				rainbow.setY(450);
 				rainbowBool=false;
 			}
-	
-			if(started == true){//when start button is clicked
-				 classic.setAY(1);
-				 classic.setVy(classic.getVy()+classic.getAY());
-				 classic.move();
-			 }
 			
+			 }
 		}
 
 		
@@ -158,7 +164,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		//call their collision detection
 		
 		
-	//end of update method - put code above for any updates on variable
+	}//end of update method - put code above for any updates on variable
 		
 	
 	//==================code above ===========================
@@ -252,13 +258,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			classic.getImg().setVisible(true);
-			classicBool=true;
+			if(active==false){
+				classicBool=true;
+				started = true;
+			}
 			one.getImg().setVisible(false);
 			two.getImg().setVisible(false);
 			three.getImg().setVisible(false);
 			four.getImg().setVisible(false);
 			five.getImg().setVisible(false);
-			started = true;
+			
 		}
 		if(e.getKeyCode()==50||e.getKeyCode()==98){//secondflappy
 			label_start.setVisible(false);
@@ -267,12 +276,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			blue.getImg().setVisible(true);
+			if(active==false){
 			blueBool=true;
+			started = true;
+			}
 			one.getImg().setVisible(false);
 			two.getImg().setVisible(false);
 			three.getImg().setVisible(false);
 			four.getImg().setVisible(false);
 			five.getImg().setVisible(false);
+		
 		}
 		if(e.getKeyCode()==51||e.getKeyCode()==99){//third flappy
 			label_start.setVisible(false);
@@ -281,12 +294,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			green.getImg().setVisible(true);
+			if(active==false){
 			greenBool=true;
+			started = true;
+			}
 			one.getImg().setVisible(false);
 			two.getImg().setVisible(false);
 			three.getImg().setVisible(false);
 			four.getImg().setVisible(false);
 			five.getImg().setVisible(false);
+		
 		}
 		if(e.getKeyCode()==52||e.getKeyCode()==100){//fourth flappy
 			label_start.setVisible(false);
@@ -295,12 +312,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			green.getImg().setVisible(false);
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(true);
+			if(active==false){
 			redBool=true;
+			started = true;
+			}
 			one.getImg().setVisible(false);
 			two.getImg().setVisible(false);
 			three.getImg().setVisible(false);
 			four.getImg().setVisible(false);
 			five.getImg().setVisible(false);
+			
 		}
 		if(e.getKeyCode()==53||e.getKeyCode()==101){//fifth flappy
 			label_start.setVisible(false);
@@ -309,16 +330,18 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			green.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			rainbow.getImg().setVisible(true);
+			if(active==false){
 			rainbowBool=true;
+			started = true;
+			}
 			one.getImg().setVisible(false);
 			two.getImg().setVisible(false);
 			three.getImg().setVisible(false);
 			four.getImg().setVisible(false);
 			five.getImg().setVisible(false);
+			
 		}
-		if(e.getKeyCode()==38){ //38 is up
-
-		}
+		
 	
 		update();
 	}
@@ -326,13 +349,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getKeyCode()==32&&active == true){ //spacebar
+			classic.move();
+			blue.move();
+			red.move();
+			green.move();
+			rainbow.move();
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+	
 	}
 
 	@Override
@@ -380,4 +409,5 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	}
 	
 }
+
 
