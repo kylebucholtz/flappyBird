@@ -108,7 +108,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 						bp[i].setY(tp[i].getY()+1100);
 			
 			 }
-			 	
+			 } 	
 				//img.setBounds(x, y , w, h);
 			if(classicBool==true){
 				classic.setY(450);
@@ -150,6 +150,29 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				rainbowBool=false;
 			}
 			
+			
+			
+			 if(active==true){
+				 classic.setAY(.1);
+				 classic.setVy(classic.getVy()+classic.getAY() );
+				 classic.move();
+				 
+				 blue.setAY(.1);
+				 blue.setVy(classic.getVy()+classic.getAY() );
+				 blue.move();
+				 
+				 green.setAY(.1);
+				 green.setVy(classic.getVy()+classic.getAY() );
+				 green.move();
+				 
+				 red.setAY(.1);
+				 red.setVy(classic.getVy()+classic.getAY() );
+				 red.move();
+				 
+				 rainbow.setAY(.1);
+				 rainbow.setVy(classic.getVy()+classic.getAY() );
+				 rainbow.move();
+				 
 			 }
 		}
 
@@ -350,11 +373,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==32&&active == true){ //spacebar
-			classic.move();
-			blue.move();
-			red.move();
-			green.move();
-			rainbow.move();
+			classic.setVy(-3);
+			blue.setVy(-3);
+			red.setVy(-3);
+			green.setVy(-3);
+			rainbow.setVy(-3);
+			
 		}
 	}
 
