@@ -158,19 +158,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				 classic.move();
 				 
 				 blue.setAY(.1);
-				 blue.setVy(classic.getVy()+classic.getAY() );
+				 blue.setVy(blue.getVy()+blue.getAY() );
 				 blue.move();
 				 
 				 green.setAY(.1);
-				 green.setVy(classic.getVy()+classic.getAY() );
+				 green.setVy(green.getVy()+green.getAY() );
 				 green.move();
 				 
 				 red.setAY(.1);
-				 red.setVy(classic.getVy()+classic.getAY() );
+				 red.setVy(red.getVy()+red.getAY() );
 				 red.move();
 				 
 				 rainbow.setAY(.1);
-				 rainbow.setVy(classic.getVy()+classic.getAY() );
+				 rainbow.setVy(rainbow.getVy()+rainbow.getAY() );
 				 rainbow.move();
 				 
 			 }
@@ -295,7 +295,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		if(e.getKeyCode()==50||e.getKeyCode()==98){//secondflappy
 			label_start.setVisible(false);
 			classic.getImg().setVisible(false);
-			green.getImg().setVisible(false);
+			green.getImg().setVisible(false);   
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			blue.getImg().setVisible(true);
