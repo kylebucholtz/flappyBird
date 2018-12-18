@@ -33,6 +33,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	String bg = "bg.png";
 	JLabel background;
 	JLabel label_start = new JLabel("Start");
+	JLabel label_lose = new JLabel("Game Over!");
 	Font font = new Font ("Courier New", 1, 100);
 
 	boolean classicBool = false;
@@ -205,10 +206,22 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 								//collision
 							dead = true;
 							active = false;
+							
 							}
 					}
+					for(int i=0; i<bp.length; i++){
+						if(classic.getY() >= 900 && active){
+								//collision
+							dead = true;
+							active = false;
+							
+							}
+					}
+					
 					if(dead == true){
 						background.setVisible(false);
+						label_lose.setVisible(true);
+						label_score.setForeground(Color.WHITE);
 					}
 			 
 				
@@ -260,6 +273,18 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		label_start.setFont(font);
 		f.add(label_start).setVisible(true);
 //		
+		
+		
+		
+		
+		
+		label_lose.setBounds(350, 100, 600, 600);
+		label_lose.setForeground(Color.WHITE);
+		//update text
+		label_lose.setFont(font);
+		f.add(label_lose).setVisible(false);
+		
+		
 		f.add(classic.getImg());
 		f.add(blue.getImg());
 		f.add(green.getImg());
