@@ -34,7 +34,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	JLabel background;
 	JLabel label_start = new JLabel("Start");
 	JLabel label_lose = new JLabel("Game Over!");
+	JLabel label_instruct = new JLabel("Enter");
 	Font font = new Font ("Courier New", 1, 100);
+	Font endFont = new Font ("Courier New", 1, 200);
 
 	boolean classicBool = false;
 	boolean blueBool = false;
@@ -170,23 +172,23 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			
 			
 			 if(active==true&&dead==false){
-				 classic.setAY(1.2);
+				 classic.setAY(1.3);
 				 classic.setVy(classic.getVy()+classic.getAY() );
 				 classic.move();
 				 
-				 blue.setAY(1.2);
+				 blue.setAY(1.3);
 				 blue.setVy(blue.getVy()+blue.getAY() );
 				 blue.move();
 				 
-				 green.setAY(1.2);
+				 green.setAY(1.3);
 				 green.setVy(green.getVy()+green.getAY() );
 				 green.move();
 				 
-				 red.setAY(1.2);
+				 red.setAY(1.3);
 				 red.setVy(red.getVy()+red.getAY() );
 				 red.move();
 				 
-				 rainbow.setAY(1.2);
+				 rainbow.setAY(1.3);
 				 rainbow.setVy(rainbow.getVy()+rainbow.getAY() );
 				 rainbow.move();
 			 } 
@@ -222,6 +224,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 						background.setVisible(false);
 						label_lose.setVisible(true);
 						label_score.setForeground(Color.WHITE);
+						label_score.setBounds(575, 200, 400, 200);
+						label_score.setFont(endFont);
+						//label_instruct.setVisible(true);
 					}
 			 
 				
@@ -278,7 +283,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		
 		
-		label_lose.setBounds(350, 100, 600, 600);
+		label_lose.setBounds(350, 200, 600, 600);
 		label_lose.setForeground(Color.WHITE);
 		//update text
 		label_lose.setFont(font);
@@ -303,7 +308,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		label_score.setBounds(575, 50, 200, 100);
 		label_score.setForeground(Color.black);
 		
+//		label_instruct.setBounds(575, 500, 200, 200);
+//		label_instruct.setForeground(Color.WHITE);
+//		label_instruct.setFont(font);
+//		label_instruct.setText("Enter");
+//		f.add(label_instruct).setVisible(false);
 		// update text
+		
+		
 		label_score.setText(Integer.toString(score));
 		f.add(label_score);
 
@@ -355,7 +367,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			red.getImg().setVisible(false);
 			classic.getImg().setVisible(true);
 			startScreen = false;
-			if(active==false){
+			if(active==false&&dead==false){
 				classicBool=true;
 				started = true;
 			}
@@ -374,7 +386,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			red.getImg().setVisible(false);
 			blue.getImg().setVisible(true);
 			startScreen = false;
-			if(active==false){
+			if(active==false&&dead==false){
 			blueBool=true;
 			started = true;
 			}
@@ -393,7 +405,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			red.getImg().setVisible(false);
 			green.getImg().setVisible(true);
 			startScreen = false;
-			if(active==false){
+			if(active==false&&dead==false){
 			greenBool=true;
 			started = true;
 			}
@@ -412,7 +424,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(true);
 			startScreen = false;
-			if(active==false){
+			if(active==false&&dead ==false){
 			redBool=true;
 			started = true;
 			}
@@ -431,7 +443,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			red.getImg().setVisible(false);
 			rainbow.getImg().setVisible(true);
 			startScreen = false;
-			if(active==false){
+			if(active==false&&dead==false){
 			rainbowBool=true;
 			started = true;
 			}
@@ -451,13 +463,47 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==32&&active == true){ //spacebar
-			classic.setVy(-12);
-			blue.setVy(-12);
-			red.setVy(-12);
-			green.setVy(-12);
-			rainbow.setVy(-12);
+			classic.setVy(-14);
+			blue.setVy(-14);
+			red.setVy(-14);
+			green.setVy(-14);
+			rainbow.setVy(-14);
 			
 		}
+		if(e.getKeyCode()==10&&dead==true){
+			classic.setY(90);
+			blue.setY(180);
+			green.setY(270);
+			red.setY(360);
+			rainbow.setY(450);
+			classic.getImg().setVisible(true);
+			blue.getImg().setVisible(true);
+			red.getImg().setVisible(true);
+			green.getImg().setVisible(true);
+			rainbow.getImg().setVisible(true);
+			label_start.setVisible(true);
+			background.setVisible(true);
+			dead=false;
+			active=false;
+			label_lose.setVisible(false);
+			one.getImg().setVisible(true);
+			two.getImg().setVisible(true);
+			three.getImg().setVisible(true);
+			four.getImg().setVisible(true);
+			five.getImg().setVisible(true);
+			startScreen = true;
+			label_score.setForeground(Color.BLACK);
+			score=0;
+			classic.setVy(0);
+			blue.setVy(0);
+			green.setVy(0);
+			red.setVy(0);
+			rainbow.setVy(0);
+			label_score.setText(Integer.toString(score));
+			label_score.setBounds(575, 200, 400, 200);
+		}
+		
+		
 	}
 
 	@Override
