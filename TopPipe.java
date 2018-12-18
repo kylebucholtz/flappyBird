@@ -1,5 +1,6 @@
 
-	import java.io.File;
+	import java.awt.Rectangle;
+import java.io.File;
 
 	import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -10,7 +11,7 @@ public class TopPipe {
 		private int w,h; //width and height of the object
 		private int vx, vy; //constant vel in x and y component
 		private JLabel img; //holds image for object
-		
+		boolean counter = false;
 		
 		//constructor that takes in the Filename
 		public TopPipe(String filename) {
@@ -98,8 +99,17 @@ public class TopPipe {
 			if(x<0){
 				x=1200;
 				y = (int)(Math.random()*(-300)-400);
+				counter  = false;
 			}
 			img.setBounds(x, y , w, h);
+		}
+
+		public Rectangle getRect() {
+			Rectangle tp = new Rectangle(x, y, w, h);
+			return tp;
+			// TODO Auto-generated method stub
+			
+			
 		}
 		
 		

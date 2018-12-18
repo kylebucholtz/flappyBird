@@ -1,3 +1,4 @@
+import java.awt.Rectangle;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -24,8 +25,7 @@ public class Classic {
 			// frog is 20 wide and 20 high
 			w = 76; //width
 			h = 56; //height
-			vy=0;
-			
+			vy= 0;
 			x = 30;
 			y = 90;
 			
@@ -36,6 +36,7 @@ public class Classic {
 		}
 
 		public void move(){
+			
 			y+=vy;
 			img.setBounds(x, y, w, h);
 		}
@@ -86,10 +87,11 @@ public class Classic {
 			vy = newVY;
 		}
 		
+		
+	
 		public void setAY(double d){
 			AY = d;
 		}
-		
 		public void setX(int newX){
 			x = newX; //assign this object's y with a new value passed in
 		}
@@ -98,7 +100,14 @@ public class Classic {
 			y = newY; //assign this object's y with a new value passed in
 			img.setBounds(x,y,w,h);
 		}
+
+		public Rectangle getRect() {
+			// TODO Auto-generated method stub
+			Rectangle bird = new Rectangle(x, y, w, h);
+			return bird;
+		}
 		
 		
 		
 }
+

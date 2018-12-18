@@ -1,6 +1,7 @@
 
 
-	import java.io.File;
+	import java.awt.Rectangle;
+import java.io.File;
 
 	import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -94,6 +95,12 @@ public class BottomPipe {
 					y = 800;
 				}
 			img.setBounds(x, y , w, h);
+		}
+
+		public Rectangle getRect() {
+			// TODO Auto-generated method stub
+			Rectangle bp = new Rectangle(x, y, w, h);
+			return bp;
 		}
 		
 		
