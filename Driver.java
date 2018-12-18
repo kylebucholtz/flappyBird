@@ -1,5 +1,6 @@
 import java.applet.Applet;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -41,13 +42,18 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	boolean rainbowBool = false;
 	boolean started = false;
 	boolean active = false;
-
+	boolean dead = false;
+	boolean scoreBool = false;
+	boolean startScreen = true;
 	
 	Classic classic = new Classic("flappyBirdClassic.png");
 	Blue blue = new Blue("flappyBirdBlue.png");
 	Green green = new Green("flappyBirdGreen.png");
 	Rainbow rainbow = new Rainbow("flappyBirdRainbow.png");
 	Red red = new Red("flappyBirdRed.png");
+	
+	JLabel label_score = new JLabel("");
+	int score = 0;
 	
 	
 	One one = new One("#1.png");
@@ -86,27 +92,37 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	/* do not draw here */
 	public void update() {
 		//use booleans to determine which collision is happening
-		
+		for(int i=0; i<tp.length; i++){
+			if(classic.getX()>=tp[i].getX()&&!tp[i].counter && startScreen == false){
+				//collision
+				label_score.setText(Integer.toString(score+=1));
+				tp[i].counter=true;//
+			
+			}
+		}
 		
 		if(started == true){
 			for(int i=0; i <tp.length; i++){
-				tp[i].setX(777+(i*200+i*90));
-				bp[i].setX(777+(i*200+i*90));
 				started = false;
 				active = true;
+				tp[i].setX(777+(i*200+i*90));
+				bp[i].setX(777+(i*200+i*90));
+				
 		}
 		}
 		for(int i=0; i <tp.length; i++){
+			if(dead==false){
 				tp[i].move();
+			}
 		}
 		
 		for(int i=0; i<bp.length; i++){
-			 bp[i].setX(bp[i].getX()-5);
-			 {
+			 if(dead==false){
+				 bp[i].setX(bp[i].getX()-5);
 			 if(bp[i].getX()<0){
 					 bp[i].setX(1200);
 						bp[i].setY(tp[i].getY()+1100);
-			
+			 }
 			 }
 			 } 	
 				//img.setBounds(x, y , w, h);
@@ -152,31 +168,52 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			
 			
 			
-			 if(active==true){
-				 classic.setAY(.1);
+			 if(active==true&&dead==false){
+				 classic.setAY(1.2);
 				 classic.setVy(classic.getVy()+classic.getAY() );
 				 classic.move();
 				 
-				 blue.setAY(.1);
+				 blue.setAY(1.2);
 				 blue.setVy(blue.getVy()+blue.getAY() );
 				 blue.move();
 				 
-				 green.setAY(.1);
+				 green.setAY(1.2);
 				 green.setVy(green.getVy()+green.getAY() );
 				 green.move();
 				 
-				 red.setAY(.1);
+				 red.setAY(1.2);
 				 red.setVy(red.getVy()+red.getAY() );
 				 red.move();
 				 
-				 rainbow.setAY(.1);
+				 rainbow.setAY(1.2);
 				 rainbow.setVy(rainbow.getVy()+rainbow.getAY() );
 				 rainbow.move();
+			 } 
 				 
-			 }
-		}
-
-		
+				for(int i=0; i<tp.length; i++){
+					if(tp[i].getRect().intersects(classic.getRect()) && active == true){
+						//collision
+						dead = true;
+						active = false;
+					}
+						
+						//lifeCount--;
+						
+					}
+					for(int i=0; i<bp.length; i++){
+						if(bp[i].getRect().intersects(classic.getRect()) && active){
+								//collision
+							dead = true;
+							active = false;
+							}
+					}
+					if(dead == true){
+						background.setVisible(false);
+					}
+			 
+				
+					
+				
 		//loop through each object in Squares
 		//call their collision detection
 
@@ -234,6 +271,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.add(three.getImg());
 		f.add(four.getImg());
 		f.add(five.getImg());
+		
+		
+		
+		label_score.setFont(font); // if you want bigger font
+		label_score.setBounds(575, 50, 200, 100);
+		label_score.setForeground(Color.black);
+		
+		// update text
+		label_score.setText(Integer.toString(score));
+		f.add(label_score);
 
 		for(int i = 0; i<tp.length; i++){
 	tp[i] = new TopPipe("flappyPipeTop.jpg");
@@ -248,6 +295,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					f.add(bp[i].getImg());//paints bottom pipe
 				}
 		
+	
 		
 		
 		
@@ -281,6 +329,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			classic.getImg().setVisible(true);
+			startScreen = false;
 			if(active==false){
 				classicBool=true;
 				started = true;
@@ -299,6 +348,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			blue.getImg().setVisible(true);
+			startScreen = false;
 			if(active==false){
 			blueBool=true;
 			started = true;
@@ -317,6 +367,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			green.getImg().setVisible(true);
+			startScreen = false;
 			if(active==false){
 			greenBool=true;
 			started = true;
@@ -335,6 +386,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			green.getImg().setVisible(false);
 			rainbow.getImg().setVisible(false);
 			red.getImg().setVisible(true);
+			startScreen = false;
 			if(active==false){
 			redBool=true;
 			started = true;
@@ -353,6 +405,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			green.getImg().setVisible(false);
 			red.getImg().setVisible(false);
 			rainbow.getImg().setVisible(true);
+			startScreen = false;
 			if(active==false){
 			rainbowBool=true;
 			started = true;
@@ -373,11 +426,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==32&&active == true){ //spacebar
-			classic.setVy(-3);
-			blue.setVy(-3);
-			red.setVy(-3);
-			green.setVy(-3);
-			rainbow.setVy(-3);
+			classic.setVy(-12);
+			blue.setVy(-12);
+			red.setVy(-12);
+			green.setVy(-12);
+			rainbow.setVy(-12);
 			
 		}
 	}
