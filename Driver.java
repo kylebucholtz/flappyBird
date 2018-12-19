@@ -32,9 +32,15 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	int g = 0;
 	String bg = "bg.png";
 	JLabel background;
+	String bgEnd = "FBGameOver.jpg";
+	JLabel endBackground;
 	JLabel label_start = new JLabel("Start");
 	JLabel label_lose = new JLabel("Game Over!");
-	JLabel label_instruct = new JLabel("Enter");
+	JLabel label_end = new JLabel("");
+	JLabel label_space = new JLabel("Press Space to Jump");
+	JLabel label_pick = new JLabel("Pick Your Bird to Start");
+	
+	Font tinyfont = new Font ("Courier New", 1, 50);
 	Font font = new Font ("Courier New", 1, 100);
 	Font endFont = new Font ("Courier New", 1, 200);
 
@@ -96,7 +102,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void update() {
 		//use booleans to determine which collision is happening
 		for(int i=0; i<tp.length; i++){
-			if(classic.getX()>=tp[i].getX()&&!tp[i].counter && startScreen == false){
+			if(classic.getX()>=tp[i].getX()&& classic.getY()>tp[i].getY()&&!tp[i].counter && startScreen == false){
 				//collision
 				label_score.setText(Integer.toString(score+=1));
 				tp[i].counter=true;//
@@ -110,6 +116,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				active = true;
 				tp[i].setX(777+(i*200+i*90));
 				bp[i].setX(777+(i*200+i*90));
+				label_space.setVisible(false);
+				label_pick.setVisible(false);
 				
 		}
 		}
@@ -222,10 +230,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					
 					if(dead == true){
 						background.setVisible(false);
-						label_lose.setVisible(true);
-						label_score.setForeground(Color.WHITE);
+						label_score.setForeground(Color.BLACK);
 						label_score.setBounds(575, 200, 400, 200);
 						label_score.setFont(endFont);
+						label_end.setVisible(true);
+						label_end.setForeground(Color.BLACK);
+						label_end.setBounds(325, 425, 800, 400);
+						label_end.setFont(tinyfont);
+						endBackground.setVisible(true);
 						//label_instruct.setVisible(true);
 					}
 			 
@@ -269,6 +281,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		background = new JLabel(backg);
 		background.setBounds(0,0, 1200,900); //set location and size of icon
 		
+		
+		ImageIcon endBackg = new ImageIcon(src+bgEnd);    //setups icon image
+		endBackground = new JLabel(endBackg);
+		endBackground.setBounds(0,0, 1200,900); //set location and size of icon
 
 	//set up start
 		
@@ -279,15 +295,23 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.add(label_start).setVisible(true);
 //		
 		
+		label_space.setFont(tinyfont);
+		label_space.setBounds(325, 425, 800, 400);
+		label_space.setForeground(Color.BLACK);
+		f.add(label_space).setVisible(true);
+		
+		label_pick.setFont(tinyfont);
+		label_pick.setBounds(275, 325, 800, 400);
+		label_pick.setForeground(Color.BLACK);
+		f.add(label_pick).setVisible(true);
 		
 		
 		
-		
-		label_lose.setBounds(350, 200, 600, 600);
-		label_lose.setForeground(Color.WHITE);
-		//update text
-		label_lose.setFont(font);
-		f.add(label_lose).setVisible(false);
+//		label_lose.setBounds(350, 200, 600, 600);
+//		label_lose.setForeground(Color.WHITE);
+//		//update text
+//		label_lose.setFont(font);
+//		f.add(label_lose).setVisible(false);
 		
 		
 		f.add(classic.getImg());
@@ -308,17 +332,22 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		label_score.setBounds(575, 50, 200, 100);
 		label_score.setForeground(Color.black);
 		
-//		label_instruct.setBounds(575, 500, 200, 200);
-//		label_instruct.setForeground(Color.WHITE);
-//		label_instruct.setFont(font);
-//		label_instruct.setText("Enter");
-//		f.add(label_instruct).setVisible(false);
+		label_end.setBounds(575, 500, 200, 200);
+		label_end.setForeground(Color.WHITE);
+		label_end.setFont(font);
+		label_end.setText("Press Enter to Restart");
+		f.add(label_end).setVisible(false);
 		// update text
 		
 		
 		label_score.setText(Integer.toString(score));
 		f.add(label_score);
 
+		
+		f.add(endBackground);
+		endBackground.setVisible(false);
+		
+		
 		for(int i = 0; i<tp.length; i++){
 	tp[i] = new TopPipe("flappyPipeTop.jpg");
 		tp[i].setX(i*200+i*90);
@@ -332,7 +361,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					f.add(bp[i].getImg());//paints bottom pipe
 				}
 		
-	
 		
 		
 		
@@ -359,7 +387,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println(e.getKeyCode());
-		if(e.getKeyCode()==49||e.getKeyCode()==97){//first flappy
+		if(e.getKeyCode()==49||e.getKeyCode()==97&&dead==false){//first flappy
 			label_start.setVisible(false);
 			blue.getImg().setVisible(false);
 			green.getImg().setVisible(false);
@@ -378,7 +406,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			five.getImg().setVisible(false);
 			
 		}
-		if(e.getKeyCode()==50||e.getKeyCode()==98){//secondflappy
+		if(e.getKeyCode()==50||e.getKeyCode()==98&&dead==false){//secondflappy
 			label_start.setVisible(false);
 			classic.getImg().setVisible(false);
 			green.getImg().setVisible(false);   
@@ -397,7 +425,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			five.getImg().setVisible(false);
 		
 		}
-		if(e.getKeyCode()==51||e.getKeyCode()==99){//third flappy
+		if(e.getKeyCode()==51||e.getKeyCode()==99&&dead==false){//third flappy
 			label_start.setVisible(false);
 			classic.getImg().setVisible(false);
 			blue.getImg().setVisible(false);
@@ -416,7 +444,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			five.getImg().setVisible(false);
 		
 		}
-		if(e.getKeyCode()==52||e.getKeyCode()==100){//fourth flappy
+		if(e.getKeyCode()==52||e.getKeyCode()==100&&dead==false){//fourth flappy
 			label_start.setVisible(false);
 			classic.getImg().setVisible(false);
 			blue.getImg().setVisible(false);
@@ -435,7 +463,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			five.getImg().setVisible(false);
 			
 		}
-		if(e.getKeyCode()==53||e.getKeyCode()==101){//fifth flappy
+		if(e.getKeyCode()==53||e.getKeyCode()==101&&dead==false){//fifth flappy
 			label_start.setVisible(false);
 			classic.getImg().setVisible(false);
 			blue.getImg().setVisible(false);
@@ -485,7 +513,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			background.setVisible(true);
 			dead=false;
 			active=false;
-			label_lose.setVisible(false);
+			//label_lose.setVisible(false);
 			one.getImg().setVisible(true);
 			two.getImg().setVisible(true);
 			three.getImg().setVisible(true);
@@ -500,7 +528,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			red.setVy(0);
 			rainbow.setVy(0);
 			label_score.setText(Integer.toString(score));
-			label_score.setBounds(575, 200, 400, 200);
+			label_score.setBounds(575, 50, 200, 100);
+			label_score.setFont(font);
+			label_end.setVisible(false);
+			label_space.setVisible(true);
+			label_pick.setVisible(true);
+			endBackground.setVisible(false);
 		}
 		
 		
