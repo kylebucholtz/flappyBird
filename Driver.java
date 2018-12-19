@@ -25,17 +25,16 @@ import javax.swing.Timer;
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 	
 	//properties of this class - the panel that shows up
-	int screen_width 	= 1200;
-	int screen_height 	= 900;
-	int max_vals = 200;
-	int size = 30;
-	int g = 0;
+	int screen_width 	= 1200; //width of the screen
+	int screen_height 	= 900;  //height of the screen
+	
 	String bg = "bg.png";
 	JLabel background;
 	String bgEnd = "FBGameOver.jpg";
 	JLabel endBackground;
+	
+	
 	JLabel label_start = new JLabel("Start");
-	JLabel label_lose = new JLabel("Game Over!");
 	JLabel label_end = new JLabel("");
 	JLabel label_space = new JLabel("Press Space to Jump");
 	JLabel label_pick = new JLabel("Pick Your Bird to Start");
@@ -64,29 +63,20 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	JLabel label_score = new JLabel("");
 	int score = 0;
 	
-	
 	One one = new One("#1.png");
 	Two two = new Two("#2.png");
 	Three three = new Three("#3.png");
 	Four four = new Four("#4.png");
 	Five five = new Five("#5.png");
 	
-	
 	BottomPipe[] bp = new BottomPipe[4];
-	TopPipe[] tp = new TopPipe[4];
-
-	//1) Declare an array of Square objects here
-	
-	//2) declare an array of Circle objects here
-	
-	//3) Declare the game character here
-	
+	TopPipe[] tp = new TopPipe[4];	
 
 	//only do drawing for paint
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 
-		g.setFont(font);
+		//g.setFont(font);
 
 		
 	
@@ -105,8 +95,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			if(classic.getX()>=tp[i].getX()&& classic.getY()>tp[i].getY()&&!tp[i].counter && startScreen == false){
 				//collision
 				label_score.setText(Integer.toString(score+=1));
-				tp[i].counter=true;//
-			
+				tp[i].counter=true;
 			}
 		}
 		
@@ -118,6 +107,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				bp[i].setX(777+(i*200+i*90));
 				label_space.setVisible(false);
 				label_pick.setVisible(false);
+				score = 0;
+				label_score.setText(Integer.toString(score));
+				
 				
 		}
 		}
@@ -231,11 +223,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 					if(dead == true){
 						background.setVisible(false);
 						label_score.setForeground(Color.BLACK);
-						label_score.setBounds(575, 200, 400, 200);
+						label_score.setBounds(575, 150, 400, 200);
 						label_score.setFont(endFont);
 						label_end.setVisible(true);
 						label_end.setForeground(Color.BLACK);
-						label_end.setBounds(325, 425, 800, 400);
+						label_end.setBounds(325, 475, 800, 400);
 						label_end.setFont(tinyfont);
 						endBackground.setVisible(true);
 						//label_instruct.setVisible(true);
@@ -314,11 +306,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 //		f.add(label_lose).setVisible(false);
 		
 		
-		f.add(classic.getImg());
-		f.add(blue.getImg());
-		f.add(green.getImg());
-		f.add(rainbow.getImg());
-		f.add(red.getImg());
+		
 
 		f.add(one.getImg());
 		f.add(two.getImg());
@@ -346,6 +334,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		
 		f.add(endBackground);
 		endBackground.setVisible(false);
+		
+		f.add(classic.getImg());
+		f.add(blue.getImg());
+		f.add(green.getImg());
+		f.add(rainbow.getImg());
+		f.add(red.getImg());
 		
 		
 		for(int i = 0; i<tp.length; i++){
