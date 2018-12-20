@@ -8,10 +8,9 @@ public class Classic {
 		//fields for a Frogger object
 		private int x,y; //location of the object
 		private int w,h; //width and height of the object
-		private double vx, vy; //constant vel in x and y component
-		private double AY;
+		private double vy; // vel in y component
+		private double AY; //accel in y
 		private JLabel img; //holds image for object
-		
 		
 		//constructor that takes in the Filename
 		public Classic(String filename) {
@@ -20,14 +19,12 @@ public class Classic {
 			ImageIcon ClassicIcon = new ImageIcon(src+filename);
 			//connect the file to the img
 			img = new JLabel(ClassicIcon);
-			
-			//set location of frog
-			// frog is 20 wide and 20 high
+
 			w = 76; //width
 			h = 56; //height
-			vy= 0;
-			x = 30;
-			y = 90;
+			vy= 0;//y velocity
+			x = 30;//starting x
+			y = 90;//starting y
 			
 			//locate image based on x,y,w,h
 			img.setBounds(x, y, w, h);
@@ -35,9 +32,9 @@ public class Classic {
 		
 		}
 
-		public void move(){
+		public void move(){//move method
 			
-			y+=vy;
+			y+=vy;//y increments by vy
 			img.setBounds(x, y, w, h);
 		}
 		
@@ -67,10 +64,6 @@ public class Classic {
 			return h;
 		}
 		
-		public double getVx(){
-			return vx;
-		}
-		
 		public double getVy(){
 			return vy;
 		}
@@ -79,15 +72,9 @@ public class Classic {
 			return AY;
 		}
 		
-		public void setVx(int newVX){
-			vx = newVX;
-		}
-		
 		public void setVy(double newVY){
 			vy = newVY;
 		}
-		
-		
 	
 		public void setAY(double d){
 			AY = d;
@@ -100,7 +87,6 @@ public class Classic {
 			y = newY; //assign this object's y with a new value passed in
 			img.setBounds(x,y,w,h);
 		}
-
 		public Rectangle getRect() {
 			// TODO Auto-generated method stub
 			Rectangle bird = new Rectangle(x, y, w, h);

@@ -22,17 +22,14 @@ public class BottomPipe {
 			//connect the file to the img
 			img = new JLabel(bottomPipe);
 			
-			//set location of frog
-			// frog is 20 wide and 20 high
 			w = 80; //width
 			h = 906; //height
 			
-			x = 350;
-			y = 900;
+			x = 350;//x position
+			y = 900;//sets starting y 
 			
 			//locate image based on x,y,w,h
 			img.setBounds(x, y, w, h);
-			
 		
 		}
 		

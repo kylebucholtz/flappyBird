@@ -11,7 +11,7 @@ public class TopPipe {
 		private int w,h; //width and height of the object
 		private int vx, vy; //constant vel in x and y component
 		private JLabel img; //holds image for object
-		boolean counter = false;
+		boolean counter = false;//checks if each score has been counted
 		
 		//constructor that takes in the Filename
 		public TopPipe(String filename) {
@@ -21,13 +21,12 @@ public class TopPipe {
 			//connect the file to the img
 			img = new JLabel(bottomPipe);
 			
-			//set location of frog
-			// frog is 20 wide and 20 high
+		
 			w = 80; //width
 			h = 906; //height
 			
-			x = 350;
-			y =  (int)(Math.random()*(-300)-400);
+			x = 350;//starting x
+			y =  (int)(Math.random()*(-300)-400);//random y
 			
 			//locate image based on x,y,w,h
 			img.setBounds(x, y, w, h);
